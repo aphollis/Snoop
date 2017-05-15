@@ -16,7 +16,7 @@ Alerts will need to write to a config file to store info.  what else does our co
 
 
 """
-def el_button(action='', locale):
+def el_button(action='status', locale='Seattle'):
     push=subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@', locale], shell=False)
     nameof=push.pid
 

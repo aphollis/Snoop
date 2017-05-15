@@ -6,5 +6,5 @@ Created on Sat Apr 22 17:11:49 2017
 """
 
 import sys
-sys.path.insert(0, "/var/www/waitercaller")
-from waitercaller import app as application
+sys.path.insert(0, "/var/www/Snoop")
+from Snoop import app as application

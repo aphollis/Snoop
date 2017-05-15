@@ -1,8 +1,8 @@
-#!/usr/bin/python
 import sys
+from flask import Flask
 import logging
 logging.basicConfig(stream=sys.stderr)
-sys.path.insert(0,"/var/www/SnoopProj/")
+sys.path.insert(0,"/var/www/SnoopProj/Snoop/")
 
-from FlaskApp import app as application
+from snoop import app as application
 application.secret_key = 'gin&juice'

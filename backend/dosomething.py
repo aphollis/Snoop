@@ -20,9 +20,7 @@ def el_button(action, locale):
     push=subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale])
     nameof=push.pid
 
-    if nameof is int:
-        print(nameof)
-    else: print('OpenVPN is not running.')
+    print('The PID for OpenVPN is ' + nameof)
 
 def bypass():
     pass

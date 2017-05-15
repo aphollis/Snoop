@@ -17,7 +17,7 @@ Alerts will need to write to a config file to store info.  what else does our co
 
 """
 def el_button(action, locale):
-    push=subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@', locale])
+    push=subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale])
     nameof=push.pid
 
     if nameof is int:
@@ -32,4 +32,4 @@ def alerts():
 
 if __name__ == "__main__":
 
-    el_button('start', 'Seattle')
+    el_button(start, Seattle)

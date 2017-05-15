@@ -17,10 +17,11 @@ Alerts will need to write to a config file to store info.  what else does our co
 
 """
 def el_button(action, locale):
-    push=subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale])
+    push=subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale], stdout=PIPE)
     nameof=str(push.pid)
+    status=push.poll()
 
-    print('The PID for OpenVPN is ' + nameof)
+    print('The PID for OpenVPN is ' + nameof +". Popen.Poll() is " + status)
 
 def bypass():
     pass

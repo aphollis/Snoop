@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#!/usr/local/bin/python3
 """
 Created on Sat Apr 22 17:07:37 2017
 
@@ -14,4 +14,4 @@ def home():
    return "Under construction"
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(debug=True)

@@ -24,12 +24,14 @@ def el_button(locale, action = ''):
     status = output.find('openvpn')
 
     #if openvpn is running, stop process, else, start process
-    if status > -1:
-        el_button(locale, action = 'stop')
-    elif status == -1
-        el_button(locale, action = 'start')
-
-    return thebutton
+    while status > -1:
+        el_button(locale, action='stop')
+        status = -1
+        break
+    else:
+        el_button(locale, action='start')
+        status = 0
+        break
 
 def bypass():
     pass
@@ -39,4 +41,4 @@ def alerts():
 
 if __name__ == "__main__":
 
-    el_button('start', 'Seattle')
+    el_button('Seattle', 'start')

@@ -16,14 +16,20 @@ Alerts will need to write to a config file to store info.  what else does our co
 
 
 """
-def el_button(action, locale):
-    push=subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale], stdout=subprocess.PIPE)
-    status=subprocess.check_output(('push', '-A'))
-    checkstate = status.find('(running)')
+def el_button(locale, action = ''):
+    thebutton = subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale], stdout=subprocess.PIPE)
 
-    if checkstate == True:
-        print('OpenVPN is running')
-    else: print('OpenVPN is not running')
+    #output running processes and attempt to find openvpn process.
+    output = subprocess.check_output(('ps', '-A'))
+    status = output.find('openvpn')
+
+    #if openvpn is running, stop process, else, start process
+    if status > -1:
+        el_button(locale, action = 'stop')
+    elif status == -1
+        el_button(locale, action = 'start')
+
+    return thebutton
 
 def bypass():
     pass
@@ -33,4 +39,4 @@ def alerts():
 
 if __name__ == "__main__":
 
-    el_button('status', 'Seattle')
+    el_button('start', 'Seattle')

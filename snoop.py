@@ -6,12 +6,13 @@ Created on Sat Apr 22 17:07:37 2017
 """
 
 from flask import Flask
+from flask import render_templates
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-   return "Under construction"
+   return render_template("home.html")
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(debug=True)

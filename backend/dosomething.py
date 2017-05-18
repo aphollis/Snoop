@@ -54,6 +54,6 @@ def alerts():
 
 if __name__ == "__main__":
 
-    #el_button('Seattle', 'start')
+    el_button('Seattle', 'start')
     status()
     print(status())

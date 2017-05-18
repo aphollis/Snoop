@@ -19,7 +19,7 @@ Alerts will need to write to a config file to store info.  what else does our co
 
 
 def el_button(locale, recurse, action=''):
-    thebutton = subprocess.Popen(['sudo', 'service', 'openvpn@' + locale, action])
+    subprocess.Popen(['sudo', 'service', 'openvpn@' + locale, action])
     #if openvpn is running, stop process, else, start process
 
 
@@ -31,8 +31,8 @@ def el_button(locale, recurse, action=''):
         elif status() == False:
             recurse = False
             el_button(locale, recurse, 'start')
-
-    print(str(status()))
+    check = status()
+    print(str(check))
 
     # while status() and recurse:
     #     el_button(locale, 'stop', False)

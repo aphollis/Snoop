@@ -27,12 +27,12 @@ def el_button(locale, recurse, action=''):
         if status() == True:
             recurse = False
             el_button(locale, recurse, 'stop')
-            print(str(status()))
 
         elif status() == False:
             recurse = False
             el_button(locale, recurse, 'start')
-            print(str(status()))
+
+    print(str(status()))
 
     # while status() and recurse:
     #     el_button(locale, 'stop', False)

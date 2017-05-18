@@ -8,16 +8,13 @@ from time import sleep
    locale is the server locale, and should probably come from a VPN web source
 """
 
-"""TODO: 
-Check if process is running in el_button, process status is used to determine 'action' var (start/stop/etc.)
- 
-Change locale based on list of server locations, this will have to read and write to a file to reset the openvpn locale files, unless all server locations can be set up in the openvpn Dir.
+"""
+ Change locale based on list of server locations, this will have to read and write to a file to reset the openvpn locale files, unless all server locations can be set up in the openvpn Dir.
 
 Alerts will need to write to a config file to store info.  what else does our config need?
 
 
 """
-
 
 def el_button():
 
@@ -30,13 +27,18 @@ def el_button():
         startstop('start', 'Seattle')
 
 def startstop(action, locale):
+
+    #use subprocess lib to start/stop openvpn, wait for command to complete, print status
+
     command = subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale])
     command.wait()
     print("New OpenVPN Status: " + str(status()))
 
 
 def status():
+
     #output running processes and attempt to find openvpn process.
+
     output = subprocess.check_output(('ps', '-A'))
     state = output.find('openvpn')
 
@@ -48,7 +50,7 @@ def status():
     return running
 
 
-def bypass():
+def iptables():
     pass
 
 def alerts():

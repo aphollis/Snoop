@@ -24,12 +24,12 @@ def el_button(locale, recurse=bool, action=''):
 
 
     while recurse:
-        if status() is True:
+        if status() == True:
             el_button(locale, False, 'stop')
             thebutton.wait()
             print(str(status()))
 
-        else:
+        elif status() == False:
             el_button(locale, False, 'start')
             thebutton.wait()
             print(str(status()))

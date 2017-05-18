@@ -11,6 +11,7 @@ from flask import request
 import requests
 from bs4 import BeautifulSoup 
 import datetime
+from dosomething import status
 
 app = Flask(__name__)
 datetime=str(datetime.datetime.now())
@@ -18,8 +19,15 @@ datetime=str(datetime.datetime.now())
 @app.route("/")
 def home():
     response = make_response()
+
+    if status() == True:
+        status = 'Connected'
+    else:
+        status = 'Not Connected'
+
+
     return render_template("home.html",
-                          status="REPLACE WITH STATUS AS STRING",
+                          status,
                           datetime=datetime)
 
 

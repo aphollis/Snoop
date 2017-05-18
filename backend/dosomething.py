@@ -19,20 +19,33 @@ Alerts will need to write to a config file to store info.  what else does our co
 """
 
 
-def el_button(locale):
+def el_button(locale, action, recurse=bool):
+    status()
+    subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale])
+    status_out = "New OpenVPN Status: " + str(status())
+
+    while status and recurse:
+        el_button(locale, 'stop', False)
+        sleep(1.5)
+        print(status_out)
+    else:
+        el_button(locale, 'start', False)
+        sleep(1.5)
+        print(status_out)
+
 
     #if openvpn is running, stop process, else, start process
 
-    if status() == True:
-        subprocess.Popen(['sudo', 'systemctl', 'stop', 'openvpn@' + locale])
-        sleep(1.5)
-        print("New OpenVPN Status: " + str(status()))
-
-
-    elif status() == False:
-        subprocess.Popen(['sudo', 'systemctl', 'start', 'openvpn@' + locale])
-        sleep(1.5)
-        print("New OpenVPN Status: " + str(status()))
+    # if status() == True:
+    #     subprocess.Popen(['sudo', 'systemctl', 'stop', 'openvpn@' + locale])
+    #     sleep(1.5)
+    #     print("New OpenVPN Status: " + str(status()))
+    #
+    #
+    # elif status() == False:
+    #     subprocess.Popen(['sudo', 'systemctl', 'start', 'openvpn@' + locale])
+    #     sleep(1.5)
+    #     print("New OpenVPN Status: " + str(status()))
 
 
 def status():

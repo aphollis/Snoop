@@ -27,8 +27,8 @@ def el_button(locale, action, recurse=True):
     while running and recurse:
         el_button(locale, 'stop', False)
 
-    else:
-        el_button(locale, 'start')
+    while not running and recurse:
+        el_button(locale, 'start', False)
 
     print('OpenVPN Running: ' + str(status()))
 

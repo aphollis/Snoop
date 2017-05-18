@@ -18,7 +18,7 @@ Alerts will need to write to a config file to store info.  what else does our co
 """
 
 
-def el_button(locale, recurse=bool, action=''):
+def el_button(locale, recurse, action=''):
     thebutton = subprocess.Popen(['sudo', 'service', 'openvpn@' + locale, action])
     #if openvpn is running, stop process, else, start process
 

@@ -30,8 +30,8 @@ def el_button():
         startstop('start', 'Seattle')
 
 def startstop(action, locale):
-    subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale])
-    sleep(1.5)
+    command = subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale])
+    command.wait()
     print("New OpenVPN Status: " + str(status()))
 
 

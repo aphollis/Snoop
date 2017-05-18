@@ -57,7 +57,7 @@ def alerts():
 if __name__ == "__main__":
 
     print('OpenVPN Status: ' + str(status()))
-    whatdo = str(input('What do you want to do? start, stop: '))
+    whatdo = input('What do you want to do? start, stop: ')
     whatdo = whatdo.lower()
 
-    el_button('Seattle', whatdo)
+    el_button('Seattle', str(whatdo))

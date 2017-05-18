@@ -35,27 +35,15 @@ def el_button(locale):
         print("New OpenVPN Status: " + str(status()))
 
 
-    # while status() and recurse:
-    #     el_button(locale, 'stop', False)
-    #     thebutton.wait()
-    #     print(str(status()))
-    #
-    # while not status() and recurse:
-    #     el_button(locale, 'start', False)
-    #     thebutton.wait()
-    #     print(str(status()))
-
-
-
-
 def status():
     #output running processes and attempt to find openvpn process.
     output = subprocess.check_output(('ps', '-A'))
     state = output.find('openvpn')
 
-    if status == -1:
+    if state == -1:
         running = False
-    else: running = True
+    else:
+        running = True
 
     return running
 

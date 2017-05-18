@@ -1,6 +1,7 @@
 """Various functions for executing terminal commands via browser interface
 """
 import subprocess
+from time import sleep
 
 """el button starts, stops, and outputs status of the vpn server
    actions are start, stop, status.
@@ -24,12 +25,15 @@ def el_button(locale):
 
     if status() == True:
         subprocess.Popen(['sudo', 'systemctl', 'stop', 'openvpn@' + locale])
+        sleep(2)
+        print("New OpenVPN Status: " + str(status()))
+
 
     elif status() == False:
         subprocess.Popen(['sudo', 'systemctl', 'start', 'openvpn@' + locale])
+        sleep(2)
+        print("New OpenVPN Status: " + str(status()))
 
-    check = status()
-    print(str(check))
 
     # while status() and recurse:
     #     el_button(locale, 'stop', False)
@@ -47,7 +51,7 @@ def el_button(locale):
 def status():
     #output running processes and attempt to find openvpn process.
     output = subprocess.check_output(('ps', '-A'))
-    status = output.find('openvpn')
+    state = output.find('openvpn')
 
     if status == -1:
         running = False
@@ -65,7 +69,5 @@ def alerts():
 if __name__ == "__main__":
 
     print('OpenVPN Status: ' + str(status()))
-    # whatdo = input('What do you want to do? start, stop: ')
-    # whatdo = whatdo.lower()
 
     el_button('Seattle')

@@ -58,4 +58,4 @@ if __name__ == "__main__":
 
     print('OpenVPN Status: ' + str(status()))
 
-    el_button('Seattle')
+    el_button()

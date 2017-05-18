@@ -25,13 +25,13 @@ def el_button(locale, recurse, action=''):
 
     while recurse:
         if status() == True:
-            el_button(locale, False, 'stop')
-            thebutton.wait()
+            recurse = False
+            el_button(locale, recurse, 'stop')
             print(str(status()))
 
         elif status() == False:
-            el_button(locale, False, 'start')
-            thebutton.wait()
+            recurse = False
+            el_button(locale, recurse, 'start')
             print(str(status()))
 
     # while status() and recurse:

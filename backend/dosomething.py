@@ -25,13 +25,11 @@ def el_button(locale):
 
     if status() == True:
         subprocess.Popen(['sudo', 'systemctl', 'stop', 'openvpn@' + locale])
-        sleep(2)
         print("New OpenVPN Status: " + str(status()))
 
 
     elif status() == False:
         subprocess.Popen(['sudo', 'systemctl', 'start', 'openvpn@' + locale])
-        sleep(2)
         print("New OpenVPN Status: " + str(status()))
 
 

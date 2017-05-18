@@ -18,7 +18,7 @@ Alerts will need to write to a config file to store info.  what else does our co
 """
 
 
-def el_button(locale, recurse, action=''):
+def el_button(locale, recurse, action):
     subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale])
     #if openvpn is running, stop process, else, start process
 
@@ -72,4 +72,4 @@ if __name__ == "__main__":
     # whatdo = input('What do you want to do? start, stop: ')
     # whatdo = whatdo.lower()
 
-    el_button('Seattle', True, action='')
+    el_button('Seattle', True, action)

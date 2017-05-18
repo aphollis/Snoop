@@ -19,19 +19,20 @@ Alerts will need to write to a config file to store info.  what else does our co
 """
 
 
-def el_button(locale):
+def el_button():
 
     #if openvpn is running, stop process, else, start process
 
     if status() == True:
-        subprocess.Popen(['sudo', 'systemctl', 'stop', 'openvpn@' + locale])
-        sleep(1.5)
-        print("New OpenVPN Status: " + str(status()))
+        startstop('stop', 'Seattle')
 
     elif status() == False:
-        subprocess.Popen(['sudo', 'systemctl', 'start', 'openvpn@' + locale])
-        sleep(1.5)
-        print("New OpenVPN Status: " + str(status()))
+        startstop('start', 'Seattle')
+
+def startstop(action, locale):
+    subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale])
+    sleep(1.5)
+    print("New OpenVPN Status: " + str(status()))
 
 
 def status():

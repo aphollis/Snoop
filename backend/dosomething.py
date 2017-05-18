@@ -57,4 +57,4 @@ if __name__ == "__main__":
     whatdo = input('What do you want to do? start, stop')
     whatdo = whatdo.lower()
 
-    el_button('Seattle', 'whatdo')
+    el_button('Seattle', whatdo)

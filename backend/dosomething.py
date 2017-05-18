@@ -20,14 +20,13 @@ Alerts will need to write to a config file to store info.  what else does our co
 
 def el_button(locale, action, recurse=True):
     subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale], stdout=subprocess.PIPE)
-    running = status()
 
     #if openvpn is running, stop process, else, start process
 
-    while running and recurse:
+    while status() and recurse:
         el_button(locale, 'stop', False)
 
-    while not running and recurse:
+    while not status() and recurse:
         el_button(locale, 'start', False)
 
     print('OpenVPN Running: ' + str(status()))

@@ -8,34 +8,36 @@ Created on Sat Apr 22 17:07:37 2017
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask import make_response
 import requests
 from bs4 import BeautifulSoup 
 import datetime
 from dosomething import status
 
 app = Flask(__name__)
-datetime=str(datetime.datetime.now())
+date_time=str(datetime.datetime.now())
 
 @app.route("/")
 def home():
-    response = make_response()
+    ##bundle up response into object
+    resp = make_response(render_template("home.html",
+                          status=status,
+                          vpn=get_available_vpn(),
+                          current_vpn=get_current_vpn(),
+                          date_time=date_time))
+    #set cookie expiration
+    expires = datetime.datetime.now() + datetime.timedelta(days=365)
+    #set cookie for status
 
-    if status() == True:
-        status = 'Connected'
-    else:
-        status = 'Not Connected'
-
-
-    return render_template("home.html",
-                          status,
-                          datetime=datetime)
+    return resp
 
 
 def get_vpncity():
-    #gets the user selected server from teh pag
+    #gets the user selected server from the page
     query = request.args.get("vpncity")
     try:
-        available.index(query)
+        return get_available_vpn().index(query)
+
     except ValueError as v:
         raise InputError(query)
 
@@ -45,8 +47,9 @@ def InputError(value):
     return render_template("error.html",
                            value=value,
                            datetime=datetime,
-                           availablevpn=get_available_vpn(),
-                           current_vpn=get_current_vpn())
+                           available_vpn=get_available_vpn(),
+                           current_vpn=get_current_vpn(),
+                           vpn_status=get_current_vpn_status())
 
 def get_available_vpn():
     ## TODO make this a parameter that's user definable
@@ -67,6 +70,14 @@ def get_current_vpn():
     current = 'us-newyorkcity.privateinternetaccess.com'
     return current #string conatining name of server. return empty string if
                     #no connection
+
+def get_current_vpn_status():
+    
+    if status() == True:
+        status = 'Connected'
+    else:
+        status = 'Not Connected'
+    return status
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -21,7 +21,9 @@ datetime=str(datetime.datetime.now())
 def home():
     ##bundle up response into object
     resp = make_response(render_template("home.html",
-                          status,
+                          status=status,
+                          vpn=get_available_vpn(),
+                          current_vpn=get_current_vpn()
                           datetime=datetime))
     #set cookie expiration
     expires = datetime.datetime.now() + datetime.timedelta(days=365)
@@ -45,8 +47,9 @@ def InputError(value):
     return render_template("error.html",
                            value=value,
                            datetime=datetime,
-                           availablevpn=get_available_vpn(),
-                           current_vpn=get_current_vpn())
+                           available_vpn=get_available_vpn(),
+                           current_vpn=get_current_vpn(),
+                           vpn_status=get_current_vpn_status())
 
 def get_available_vpn():
     ## TODO make this a parameter that's user definable

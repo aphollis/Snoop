@@ -1,8 +1,9 @@
 """Various functions for executing terminal commands via browser interface
 """
 import subprocess
+import requests
 from time import sleep
-
+from bs4 import BeautifulSoup as bs
 """el button starts, stops, and outputs status of the vpn server
    actions are start, stop, status.
    locale is the server locale, and should probably come from a VPN web source
@@ -32,7 +33,7 @@ def startstop(action, locale):
 
     command = subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale])
     command.wait()
-    print("New OpenVPN Status: " + str(status()))
+    #print("New OpenVPN Status: " + str(status()))
 
 
 def status():
@@ -48,6 +49,30 @@ def status():
         running = True
 
     return running
+
+#Parse PIA Host website and return dict w/ Host name and host address
+def available_servers():
+    page = requests.get('https://www.privateinternetaccess.com/pages/network/')
+
+    #TODO insert better error handling here...
+    while page.status_code != 200:
+        sleep(2)
+        page
+    else:
+        soup = bs(page.content, 'html.parser')
+        server_parser = soup.find_all('td', attrs={"data-label":"Hostname"})
+
+        server_dict = dict()
+
+        for item in server_parser:
+            key = item.find_next_sibling('td').text.strip()
+
+            for string in item.stripped_strings:
+                value = string
+
+                server_dict.update({key: value})
+
+        return server_dict
 
 
 def iptables():

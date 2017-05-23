@@ -15,7 +15,7 @@ import datetime
 from dosomething import status
 
 app = Flask(__name__)
-datetime=str(datetime.datetime.now())
+date_time=str(datetime.datetime.now())
 
 @app.route("/")
 def home():
@@ -24,7 +24,7 @@ def home():
                           status=status,
                           vpn=get_available_vpn(),
                           current_vpn=get_current_vpn(),
-                          datetime=datetime))
+                          date_time=date_time))
     #set cookie expiration
     expires = datetime.datetime.now() + datetime.timedelta(days=365)
     #set cookie for status

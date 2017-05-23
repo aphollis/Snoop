@@ -23,7 +23,7 @@ def home():
     resp = make_response(render_template("home.html",
                           status=status,
                           vpn=get_available_vpn(),
-                          current_vpn=get_current_vpn()
+                          current_vpn=get_current_vpn(),
                           datetime=datetime))
     #set cookie expiration
     expires = datetime.datetime.now() + datetime.timedelta(days=365)

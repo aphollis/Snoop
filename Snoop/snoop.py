@@ -8,6 +8,7 @@ Created on Sat Apr 22 17:07:37 2017
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask import make_response
 import requests
 from bs4 import BeautifulSoup 
 import datetime
@@ -18,24 +19,23 @@ datetime=str(datetime.datetime.now())
 
 @app.route("/")
 def home():
-    response = make_response()
-
-    if status() == True:
-        status = 'Connected'
-    else:
-        status = 'Not Connected'
-
-
-    return render_template("home.html",
+    ##bundle up response into object
+    resp = make_response(render_template("home.html",
                           status,
-                          datetime=datetime)
+                          datetime=datetime))
+    #set cookie expiration
+    expires = datetime.datetime.now() + datetime.timedelta(days=365)
+    #set cookie for status
+
+    return resp
 
 
 def get_vpncity():
-    #gets the user selected server from teh pag
+    #gets the user selected server from the page
     query = request.args.get("vpncity")
     try:
-        available.index(query)
+        return get_available_vpn().index(query)
+
     except ValueError as v:
         raise InputError(query)
 
@@ -67,6 +67,14 @@ def get_current_vpn():
     current = 'us-newyorkcity.privateinternetaccess.com'
     return current #string conatining name of server. return empty string if
                     #no connection
+
+def get_current_vpn_status():
+    
+    if status() == True:
+        status = 'Connected'
+    else:
+        status = 'Not Connected'
+    return status
 
 if __name__ == '__main__':
     app.run(debug=True)

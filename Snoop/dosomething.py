@@ -87,9 +87,9 @@ def server_select(locale):
         if 'privateinternetaccess.com' in line:
             current = line
             line.replace(current, conf_line)
-        else: line = line
 
     config.writelines(lines)
+    print(lines)
 
     config.close()
 

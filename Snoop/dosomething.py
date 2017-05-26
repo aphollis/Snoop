@@ -89,7 +89,7 @@ def server_select(locale):
             line.replace(current, conf_line)
         else: line = line
 
-    config.writelines()
+    config.writelines(lines)
 
     config.close()
 

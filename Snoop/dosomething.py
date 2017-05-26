@@ -79,7 +79,7 @@ def server_select(locale):
     config = open('/etc/openvpn/snoop.conf', 'r+')
     lines = config.readlines()
     server = available_servers()
-    server = server('locale')
+    server = server.get(locale)
     conf_line = 'remote ' + server + ' 1198'
 
 

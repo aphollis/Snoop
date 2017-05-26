@@ -22,12 +22,13 @@ def home():
     ##bundle up response into object
     resp = make_response(render_template("home.html",
                           vpn_status=get_current_vpn_status(),
-                          available_vpn=get_available_vpn(),
+                          available_vpn=available_servers(),
                           current_vpn=get_current_vpn(),
                           date_time=date_time))
     #set cookie expiration
     expires = datetime.datetime.now() + datetime.timedelta(days=365)
     #set cookie for status
+
 
     return resp
 
@@ -51,19 +52,19 @@ def InputError(value):
                            current_vpn=get_current_vpn(),
                            vpn_status=get_current_vpn_status())
 
-def get_available_vpn():
-    ## TODO make this a parameter that's user definable
-    # resp = requests.get('https://www.privateinternetaccess.com/pages/client-support/')
-    # page = BeautifulSoup(resp.text, "html.parser")
-    ## precess page for list of servers
-    
-    ##TESTING ONLY
-    # available = ['us-newyorkcity.privateinternetaccess.com',
-    #              'us-texas.privateinternetaccess.com',
-    #              'us-midwest.privateinternetaccess.com']
-    available = available_servers()
-
-    return available #dict containing server names and addresses
+# def get_available_vpn():
+#     ## TODO make this a parameter that's user definable
+#     # resp = requests.get('https://www.privateinternetaccess.com/pages/client-support/')
+#     # page = BeautifulSoup(resp.text, "html.parser")
+#     ## precess page for list of servers
+#
+#     ##TESTING ONLY
+#     # available = ['us-newyorkcity.privateinternetaccess.com',
+#     #              'us-texas.privateinternetaccess.com',
+#     #              'us-midwest.privateinternetaccess.com']
+#     available = available_servers()
+#
+#     return available #dict containing server names and addresses
 
 def get_current_vpn():
     ## TODO make this function get name of currently connected vpn server

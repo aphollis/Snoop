@@ -32,7 +32,7 @@ def startstop(action, locale):
 
     #use subprocess lib to start/stop openvpn, wait for command to complete, print status
 
-    command = subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@snoop)
+    command = subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@snoop'])
     command.wait()
     #print("New OpenVPN Status: " + str(status()))
     server_select(locale)
@@ -95,6 +95,7 @@ def server_select(locale):
 
 
 def active_server():
+    pass
     """AH - I need to build a script that will alter the vpn config file and then restart the server. once that is implemented the current server can be checked in /var/run/openvpn.  this is the most straightforward way i can find to check the actual server name/location.  Now that the scraper for the server list is done, i can work on this part next."""
 
 

@@ -1,6 +1,7 @@
 """Various functions for executing terminal commands via browser interface
 """
 import subprocess
+import os.path
 import requests
 from time import sleep
 from bs4 import BeautifulSoup as bs
@@ -31,10 +32,10 @@ def startstop(action, locale):
 
     #use subprocess lib to start/stop openvpn, wait for command to complete, print status
 
-    command = subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@' + locale])
+    command = subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@snoop)
     command.wait()
     #print("New OpenVPN Status: " + str(status()))
-
+    server_select(locale)
 
 def status():
 
@@ -74,6 +75,28 @@ def available_servers():
 
         return server_dict
 
+def server_select(locale):
+    config = open('c:/etc/openvpn/snoop.conf', 'w')
+    lines = config.readlines()
+    server = available_servers()
+    server = server('locale')
+    conf_line = 'remote ' + server + ' 1198'
+
+
+    for line in lines:
+        if 'privateinternetaccess.com' in line:
+            current = line
+            line.replace(current, conf_line)
+        else: line = line
+
+    config.writelines()
+
+    config.close()
+
+
+def active_server():
+    """AH - I need to build a script that will alter the vpn config file and then restart the server. once that is implemented the current server can be checked in /var/run/openvpn.  this is the most straightforward way i can find to check the actual server name/location.  Now that the scraper for the server list is done, i can work on this part next."""
+
 
 def iptables():
     pass
@@ -83,6 +106,8 @@ def alerts():
 
 if __name__ == "__main__":
 
-    print('OpenVPN Status: ' + str(status()))
-
-    el_button()
+    #print('OpenVPN Status: ' + str(status()))
+    print(available_servers().keys())
+    #el_button()
+    locale = input('Select a server: ')
+    server_select(locale)

@@ -21,8 +21,8 @@ date_time=str(datetime.datetime.now())
 def home():
     ##bundle up response into object
     resp = make_response(render_template("home.html",
-                          status=status,
-                          vpn=get_available_vpn(),
+                          vpn_status=get_current_vpn_status(),
+                          available_vpn=get_available_vpn(),
                           current_vpn=get_current_vpn(),
                           date_time=date_time))
     #set cookie expiration

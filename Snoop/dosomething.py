@@ -85,8 +85,8 @@ def server_select(locale):
 
     #TODO Make this part work...
     [i for i, j in enumerate(lines) if findit in j]
-        lines[j] = conf_line
-        print(conf_line)
+    lines[j] = conf_line
+    print(conf_line)
 
 
         # if 'privateinternetaccess.com' in line:

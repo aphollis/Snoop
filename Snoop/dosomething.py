@@ -84,8 +84,9 @@ def server_select(locale):
     conf_line = 'remote ' + server + ' 1198'
 
     #TODO Make this part work...
-    [i for i, j in enumerate(lines) if findit in j]
-    lines[i] = conf_line
+    for i, j in enumerate(lines):
+        if findit in j:
+            lines[i] = conf_line
     print(conf_line)
 
 

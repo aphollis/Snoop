@@ -1,3 +1,4 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
         <title>Snoop OpenVPN Controller for Raspberry Pi</title>
@@ -6,25 +7,36 @@
         <meta name="viewport" content = "width=device-width, initial-scale=1.0">
     </head>
     <body>
+    
+<div class="container">
+
         <h1>Snoop Central</h1>
         <h2>Selected VPN: {{current_vpn}}<br />
         <h2>VPN Status: {{vpn_status}}</h2><br /><br />
         <h2>Options</h2>
         <b>Select New VPN Server</b>
-        <form class="form-group" action="/" method="POST">
-        Select VPN Server:
-            <select name="user_select_vpn">
-            {% for vpn in available_vpn %}
-                <option value="{{vpn}}" {{'selected="selected"' if vpn==current_vpn}}>{{vpn}}</option>
-            {% endfor %}<br />
-            </select>
-            <input type="submit" class="btn btn-success" value="Connect!">
+        <form action="/" method="POST">
+            Select VPN Server:
+            <div class="form-group">
+                <select name="user_select_vpn">
+                {% for vpn in available_vpn %}
+                    <option value="{{vpn}}" {{'selected="selected"' if vpn==current_vpn}}>{{vpn}}</option>
+                {% endfor %}<br />
+                </select>
+                <div class="input submit">
+                    <input type="submit" value="Connect!">
+                </div>
+            </div>
         </form>
+        
         <h2>STOP/START</h2><br />
         <form action="/" method="POST">
-            <input type="submit" value={{action}}>
-            {{'<input type="submit" value="Restart">' if action=="Stop"}}
+            <div class="input submit">
+                <input type="submit" value={{action}}>
+                {{'<input type="submit" value="Restart">' if action=="Stop"}}
+            </div>
         </form>
         <i>{{date_time}}</i><br />
+</div>
     </body>
 </html>

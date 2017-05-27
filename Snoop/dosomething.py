@@ -1,10 +1,10 @@
 """Various functions for executing terminal commands via browser interface
 """
 import subprocess
-import os.path
 import requests
 from time import sleep
 from bs4 import BeautifulSoup as bs
+import fileinput
 """el button starts, stops, and outputs status of the vpn server
    actions are start, stop, status.
    locale is the server locale, and should probably come from a VPN web source
@@ -77,15 +77,19 @@ def available_servers():
 
 def server_select(locale):
     config = open('/etc/openvpn/snoop.conf', 'r+')
-    lines = config.readlines()
+    #lines = config.readlines()
     server = available_servers()
     server = server.get(locale)
     findit = 'privateinternetaccess.com'
-    conf_line = 'remote ' + server + ' 1198'
+    conf_line = 'remote ' + server + ' 1198\n'
 
-    for i, line in enumerate(lines):
+    for line in config.FileInput("file", inplace=1):
         if findit in line:
-            lines[i] = conf_line
+            line.replace(findit, conf_line)
+
+    # for i, line in enumerate(lines):
+    #     if findit in line:
+    #         lines[i] = conf_line
 
     print(lines)
 

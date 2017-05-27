@@ -80,7 +80,7 @@ def server_select(locale):
     lines = config.readlines()
     server = available_servers()
     server = server.get(locale)
-    findit = 'privateinternestaccess.com'
+    findit = 'privateinternetaccess.com'
     conf_line = 'remote ' + server + ' 1198'
 
     #

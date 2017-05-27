@@ -86,8 +86,9 @@ def server_select(locale):
     # for line in fileinput.FileInput(config, inplace=1):
     #     if findit in line:
     #         line.replace(findit, conf_line)
-    config.close()
-    open('/etc/openvpn/snoop.conf')
+
+    config = open('/etc/openvpn/snoop.conf')
+    
     for i, line in enumerate(lines):
         if findit in line:
             lines[i] = conf_line

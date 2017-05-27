@@ -17,32 +17,25 @@ from dosomething import status, available_servers
 app = Flask(__name__)
 date_time=str(datetime.datetime.now())
 
-@app.route("/", method=['GET', 'POST'])
+@app.route("/")
 def home():
-    #get what user submitted
-    user_select_vpn = request.form.get("user_select_vpn")
-    
-    #do this if something is there
-    if len(user_select_vpn) > 0:
-        ### set new VPN; restart server
-        pass
-        # If restart fails, send to error page
-    
-    #do this when nothing is there    
-    else:
-        pass
-    
+    ##bundle up response into object
     resp = make_response(render_template("home.html",
                           vpn_status=get_current_vpn_status(),
                           available_vpn=available_servers(),
                           current_vpn=get_current_vpn(),
-                          action=next_action(),
                           date_time=date_time))
+    #set cookie expiration
+    expires = datetime.datetime.now() + datetime.timedelta(days=365)
+    #set cookie for status
+
+
     return resp
+
 
 def get_vpncity():
     #gets the user selected server from the page
-    query = request.form.get("vpncity")
+    query = request.args.get("vpncity")
     try:
         return get_available_vpn().index(query)
 
@@ -59,17 +52,24 @@ def InputError(value):
                            current_vpn=get_current_vpn(),
                            vpn_status=get_current_vpn_status())
 
-def set_current_vpn():
-
-    """AH - I need to build a script that will alter the vpn config file and then restart the server. once that is implemented the current server can be checked in /var/run/openvpn.  this is the most straightforward way i can find to check the actual server name/location.  Now that the scraper for the server list is done, i can work on this part next."""
-   
-    return set_report ##return TRUE, worked; FALSE, didn't work
-
+# def get_available_vpn():
+#     ## TODO make this a parameter that's user definable
+#     # resp = requests.get('https://www.privateinternetaccess.com/pages/client-support/')
+#     # page = BeautifulSoup(resp.text, "html.parser")
+#     ## precess page for list of servers
+#
+#     ##TESTING ONLY
+#     # available = ['us-newyorkcity.privateinternetaccess.com',
+#     #              'us-texas.privateinternetaccess.com',
+#     #              'us-midwest.privateinternetaccess.com']
+#     available = available_servers()
+#
+#     return available #dict containing server names and addresses
 
 def get_current_vpn():
     ## TODO make this function get name of currently connected vpn server
 
-    """need to build a script that will read the current vpn server."""
+    """AH - I need to build a script that will alter the vpn config file and then restart the server. once that is implemented the current server can be checked in /var/run/openvpn.  this is the most straightforward way i can find to check the actual server name/location.  Now that the scraper for the server list is done, i can work on this part next."""
     
     ##TESTING ONLY
     current = 'us-newyorkcity.privateinternetaccess.com'
@@ -77,18 +77,12 @@ def get_current_vpn():
                     #no connection
 
 def get_current_vpn_status():
-    vpnstatus = status()
-    if vpnstatus == True:
-        vpnstatus = 'Connected'
+    
+    if status() == True:
+        status = 'Connected'
     else:
-        vpnstatus = 'Not Connected'
-    return vpnstatus
-
-def next_action():
-    if status()==True:
-        return "Stop"
-    else:
-        return "Start"
+        status = 'Not Connected'
+    return status
 
 if __name__ == '__main__':
     app.run(debug=True)

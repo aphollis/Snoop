@@ -95,7 +95,7 @@ def server_select(locale):
     config.close()
 
 
-def set_active_server():
+def active_server():
     pass
     """AH - I need to build a script that will alter the vpn config file and then restart the server. once that is implemented the current server can be checked in /var/run/openvpn.  this is the most straightforward way i can find to check the actual server name/location.  Now that the scraper for the server list is done, i can work on this part next."""
 

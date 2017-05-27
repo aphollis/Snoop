@@ -86,10 +86,11 @@ def server_select(locale):
     #
 
     for (i, line) in enumerate(lines):
-        print(line)
         if findit in line:
             print('FOUND IT')
             lines[i] = conf_line
+        else:
+            lines[i] = line
     print(lines)
 
 

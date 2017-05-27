@@ -91,7 +91,7 @@ def server_select(locale):
                 lines[i] = conf_line
             else:
                 lines[i] = line
-        count -= 1
+            count -= 1
     print(lines)
 
 

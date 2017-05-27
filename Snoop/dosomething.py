@@ -92,8 +92,6 @@ def server_select(locale):
             print('FOUND IT')
             lines[i] = conf_line
             print(lines[i])
-        else:
-            break
 
 
 

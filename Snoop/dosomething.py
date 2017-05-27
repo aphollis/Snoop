@@ -84,12 +84,18 @@ def server_select(locale):
 
     #TODO Make this part work...
     for line in lines:
-        print(line)
-        if 'privateinternetaccess.com' in line:
-            print("FOUND IT!")
-            print(conf_line)
-            current = line
-            line.replace(current, conf_line)
+
+        for line in xrange(len(lines)):
+            print(line)
+            if 'privateinternestaccess.com' in lines[line]:
+                lines[line] = conf_line
+                print(conf_line)
+
+        # if 'privateinternetaccess.com' in line:
+        #     print("FOUND IT!")
+        #     print(conf_line)
+        #     current = line
+        #     line.replace(current, conf_line)
 
     config.writelines(lines)
     print(lines)

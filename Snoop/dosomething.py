@@ -90,6 +90,9 @@ def server_select(locale):
         if findit in line:
             print('FOUND IT')
             lines[index] = conf_line
+        elif:
+            index == len(lines)
+            break
 
     print(lines)
 

@@ -86,6 +86,7 @@ def server_select(locale):
     for line in lines:
         print(line)
         if 'privateinternetaccess.com' in line:
+            print("FOUND IT!")
             current = line
             line.replace(current, conf_line)
 

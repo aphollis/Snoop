@@ -90,7 +90,7 @@ def server_select(locale):
         if findit in line:
             print('FOUND IT')
             lines[i] = conf_line
-            print(lines[i])
+    print(lines)
 
 
 

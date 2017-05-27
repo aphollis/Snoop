@@ -82,15 +82,16 @@ def server_select(locale):
     server = server.get(locale)
     findit = 'privateinternetaccess.com'
     conf_line = 'remote ' + server + ' 1198'
+    count = len(lines)
 
-    #
-
-    for (i, line) in enumerate(lines):
-        if findit in line:
-            print('FOUND IT')
-            lines[i] = conf_line
-        else:
-            lines[i] = line
+    while count > 0:
+        for (i, line) in enumerate(lines):
+            if findit in line:
+                print('FOUND IT')
+                lines[i] = conf_line
+            else:
+                lines[i] = line
+        count -= 1
     print(lines)
 
 

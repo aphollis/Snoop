@@ -85,7 +85,7 @@ def server_select(locale):
 
     #TODO Make this part work...
     [i for i, j in enumerate(lines) if findit in j]
-    lines[j] = conf_line
+    lines[i] = conf_line
     print(conf_line)
 
 

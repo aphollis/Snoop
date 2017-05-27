@@ -86,7 +86,6 @@ def server_select(locale):
     for line in fileinput.FileInput(config, inplace=1):
         if findit in line:
             line.replace(findit, conf_line)
-        fileinput.close()
 
     # for i, line in enumerate(lines):
     #     if findit in line:
@@ -94,9 +93,9 @@ def server_select(locale):
 
     print(lines)
 
-    config.writelines(lines)
+    #config.writelines(li
 
-    config.close()
+    #config.close()
 
 
 def set_active_server():

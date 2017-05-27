@@ -83,15 +83,15 @@ def server_select(locale):
     findit = 'privateinternestaccess.com'
     conf_line = 'remote ' + server + ' 1198'
 
-    #TODO Make this part work...
-    for i, j in enumerate(lines):
-        if findit in j:
-            print(i)
+    #
+
+    for (i, line) in enumerate(lines):
+        if findit in line:
             lines[i] = conf_line
         else:
             break
     
-
+    print()
 
         # if 'privateinternetaccess.com' in line:
         #     print("FOUND IT!")

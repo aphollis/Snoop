@@ -80,16 +80,16 @@ def server_select(locale):
     lines = config.readlines()
     server = available_servers()
     server = server.get(locale)
+    findit = 'privateinternestaccess.com'
     conf_line = 'remote ' + server + ' 1198'
 
     #TODO Make this part work...
     for line in lines:
 
-        for line in xrange(len(lines)):
-            print(line)
-            if 'privateinternestaccess.com' in lines[line]:
-                lines[line] = conf_line
+        [i for i, j in enumerate(lines) if findit in j]
+                lines[j] = conf_line
                 print(conf_line)
+
 
         # if 'privateinternetaccess.com' in line:
         #     print("FOUND IT!")
@@ -97,7 +97,7 @@ def server_select(locale):
         #     current = line
         #     line.replace(current, conf_line)
 
-    config.writelines(lines)
+    #config.writelines(lines)
     print(lines)
 
     config.close()

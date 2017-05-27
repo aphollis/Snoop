@@ -17,20 +17,21 @@ from dosomething import status, available_servers
 app = Flask(__name__)
 date_time=str(datetime.datetime.now())
 
-@app.route("/", method=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def home():
     #get what user submitted
-    user_select_vpn = request.form.get("user_select_vpn")
-    
-    #do this if something is there
-    if len(user_select_vpn) > 0:
-        ### set new VPN; restart server
-        pass
-        # If restart fails, send to error page
-    
-    #do this when nothing is there    
-    else:
-        pass
+    if request.method == 'POST':
+        
+        #do this if something is there.. need to work on this
+        if user_select_vpn != None or len(user_select_vpn) > 0:
+            
+            user_select_vpn = request.form.get("user_select_vpn")
+            pass
+            # If restart fails, send to error page
+        
+        #do this when nothing is there    
+        else:
+            pass
     
     resp = make_response(render_template("home.html",
                           vpn_status=get_current_vpn_status(),

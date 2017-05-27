@@ -1,6 +1,9 @@
 <html>
     <head>
         <title>Snoop OpenVPN Controller for Raspberry Pi</title>
+        <link rel="stylesheet" media="screen" href ="static/bootstrap.min.css">
+        <link rel="stylesheet" href="static/bootstrap-theme.min.css">
+        <meta name="viewport" content = "width=device-width, initial-scale=1.0">
     </head>
     <body>
         <h1>Snoop Central</h1>
@@ -8,17 +11,20 @@
         <h2>VPN Status: {{vpn_status}}</h2><br /><br />
         <h2>Options</h2>
         <b>Select New VPN Server</b>
-        <form>
+        <form class="form-group" action="/" method="POST">
         Select VPN Server:
             <select name="user_select_vpn">
             {% for vpn in available_vpn %}
                 <option value="{{vpn}}" {{'selected="selected"' if vpn==current_vpn}}>{{vpn}}</option>
             {% endfor %}<br />
             </select>
-            <input type="submit" value="Connect!">
+            <input type="submit" class="btn btn-success" value="Connect!">
         </form>
-        do something else<br />
-        select city<br />
+        <h2>STOP/START</h2><br />
+        <form action="/" method="POST">
+            <input type="submit" value={{action}}>
+            {{'<input type="submit" value="Restart">' if action=="Stop"}}
+        </form>
         <i>{{date_time}}</i><br />
     </body>
 </html>

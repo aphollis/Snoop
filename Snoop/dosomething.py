@@ -85,21 +85,11 @@ def server_select(locale):
 
     for i, line in enumerate(lines):
         if findit in line:
-            print('FOUND IT')
             lines[i] = conf_line
 
     print(lines)
 
-
-
-
-        # if 'privateinternetaccess.com' in line:
-        #     print("FOUND IT!")
-        #     print(conf_line)
-        #     current = line
-        #     line.replace(current, conf_line)
-
-    #config.writelines(lines)
+    config.writelines(lines)
 
     config.close()
 

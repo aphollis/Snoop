@@ -83,7 +83,7 @@ def server_select(locale):
     findit = 'privateinternetaccess.com'
     conf_line = 'remote ' + server + ' 1198\n'
 
-    for line in fileinput.config("file", inplace=1):
+    for line in fileinput.FileInput(config, inplace=1):
         if findit in line:
             line.replace(findit, conf_line)
 

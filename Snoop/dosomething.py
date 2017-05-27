@@ -86,12 +86,17 @@ def server_select(locale):
     #
 
     for (i, line) in enumerate(lines):
+        print(line)
+        print(conf_line)
         if findit in line:
+            print('FOUND IT')
             lines[i] = conf_line
+            print(lines[i])
         else:
             break
-    
-    print()
+
+
+
 
         # if 'privateinternetaccess.com' in line:
         #     print("FOUND IT!")
@@ -100,7 +105,6 @@ def server_select(locale):
         #     line.replace(current, conf_line)
 
     #config.writelines(lines)
-    print(lines)
 
     config.close()
 

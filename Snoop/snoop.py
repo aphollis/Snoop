@@ -12,53 +12,43 @@ from flask import make_response
 import requests
 from bs4 import BeautifulSoup 
 import datetime
-from dosomething import status, available_servers
+import dosomething as ds
 
 app = Flask(__name__)
 date_time=str(datetime.datetime.now())
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    #get what user submitted
+    """Core function that generates pages and handles server manipulation"""
+    
     if request.method == 'POST':
-        if request.form['submit'] == 'Restart':
-            #restart server here
-            pass
-        elif request.form['submit'] == 'Stop':
-            #Stop server here
-            pass
-        elif request.form['submit'] == 'Start':
-            #start server here
-            pass
+        #get input of button
+        if request.form['submit'] != None or len(request.form['submit']) > 0:
+            #pass to startstop function
+            ds.startstop(request.form['submit'])
         else:
             pass
-        #do this if something is there.. need to work on this
-        if user_select_vpn != None or len(user_select_vpn) > 0:
-            
-            user_select_vpn = request.form.get("user_select_vpn")
-            pass
-            # If restart fails, send to error page
         
+        #get input of dropdown to select new server
+        user_select_vpn = request.form.get("user_select_vpn")
+        if user_select_vpn != None or len(user_select_vpn) > 0:
+            #change server
+            ds.server_select(user_select_vpn)
+            #restart server
+            ds.startstop('restart')
+            
         #do this when nothing is there    
         else:
             pass
     
+    #package everything up and render
     resp = make_response(render_template("home.html",
                           vpn_status=get_current_vpn_status(),
-                          available_vpn=available_servers(),
-                          current_vpn=get_current_vpn(),
+                          available_vpn=ds.available_servers(),
+                          current_vpn=ds.get_current_server(),
                           action=next_action(),
                           date_time=date_time))
     return resp
-
-def get_vpncity():
-    #gets the user selected server from the page
-    query = request.form.get("vpncity")
-    try:
-        return get_available_vpn().index(query)
-
-    except ValueError as v:
-        raise InputError(query)
 
 @app.route("/error")
 def InputError(value):
@@ -70,25 +60,10 @@ def InputError(value):
                            current_vpn=get_current_vpn(),
                            vpn_status=get_current_vpn_status())
 
-def set_current_vpn():
-
-    """AH - I need to build a script that will alter the vpn config file and then restart the server. once that is implemented the current server can be checked in /var/run/openvpn.  this is the most straightforward way i can find to check the actual server name/location.  Now that the scraper for the server list is done, i can work on this part next."""
-   
-    return set_report ##return TRUE, worked; FALSE, didn't work
-
-
-def get_current_vpn():
-    ## TODO make this function get name of currently connected vpn server
-
-    """need to build a script that will read the current vpn server."""
-    
-    ##TESTING ONLY
-    current = 'us-newyorkcity.privateinternetaccess.com'
-    return current #string conatining name of server. return empty string if
-                    #no connection
-
 def get_current_vpn_status():
-    vpnstatus = status()
+    """Returns human readable string with status of VPN"""
+    
+    vpnstatus = ds.status()
     if vpnstatus == True:
         vpnstatus = 'Connected'
     else:
@@ -96,7 +71,9 @@ def get_current_vpn_status():
     return vpnstatus
 
 def next_action():
-    if status()==True:
+    """Returns string with next availabe action based upon server's current status"""
+    
+    if ds.status()==True:
         return "Stop"
     else:
         return "Start"

@@ -109,7 +109,7 @@ def get_current_server():
     all_servers = available.values()
     read_conf = open('/etc/openvpn/snoop.conf', 'r')
     lines = read_conf.readlines()
-    key_by_value = {v: k for k, v in available_servers.iteritems()}
+    key_by_value = {v: k for k, v in available.iteritems()}
 
     while status():
         for i, line in enumerate(lines):

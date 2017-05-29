@@ -44,6 +44,8 @@ def home():
         #do this when nothing is there    
         else:
             pass
+    else:
+        pass
     
     #package everything up and render
     resp = make_response(render_template("home.html",
@@ -54,15 +56,15 @@ def home():
                           date_time=date_time))
     return resp
 
-@app.route("/error")
-def InputError(value):
-    ##TODO generate nice error page    
-    return render_template("error.html",
-                           value=value,
-                           datetime=datetime,
-                           available_vpn=get_available_vpn(),
-                           current_vpn=get_current_vpn(),
-                           vpn_status=get_current_vpn_status())
+#@app.route("/error")
+#def InputError(value):
+#    ##TODO generate nice error page    
+#    return render_template("error.html",
+#                           value=value,
+#                           datetime=datetime,
+#                           available_vpn=get_available_vpn(),
+#                           current_vpn=get_current_vpn(),
+#                           vpn_status=get_current_vpn_status())
 
 def get_current_vpn_status():
     """Returns human readable string with status of VPN"""
@@ -70,8 +72,10 @@ def get_current_vpn_status():
     vpnstatus = ds.status()
     if vpnstatus == True:
         vpnstatus = 'Connected'
-    else:
+    elif vpnstatus == False:
         vpnstatus = 'Not Connected'
+    else:
+        vpnstatus = 'Error?'
     return vpnstatus
 
 def next_action():

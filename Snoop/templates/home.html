@@ -15,7 +15,7 @@
         <h2>VPN Status: {{vpn_status}}</h2><br /><br />
         <h2>Options</h2>
         <b>Select New VPN Server</b>
-        <form action="/" method="POST">
+        <form action="/" name="user_select_vpn" method="POST">
             Select VPN Server:
             <div class="form-group">
                 <select name="user_select_vpn">
@@ -33,7 +33,7 @@
         <form action="/" method="POST">
             <div class="input submit">
                 <input type="submit" name="submit" value={{action}}>
-                {{'<input type="submit" name="submit" value="Restart">' if action=="Stop"}}
+                {{<input type="submit" name="submit" value="Restart"> if action=="Stop"}}
             </div>
         </form>
         <i>{{date_time}}</i><br />

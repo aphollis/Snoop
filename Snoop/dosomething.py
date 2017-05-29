@@ -103,7 +103,8 @@ def server_select(locale):
 
     write_conf.close()
 
-# def get_current_server():
+def get_current_server():
+    pass
 #     all_servers = available_servers.values()
 #     read_conf = open('/etc/openvpn/snoop.conf', 'r')
 #     lines = read_conf.readlines()

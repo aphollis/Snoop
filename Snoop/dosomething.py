@@ -102,9 +102,11 @@ def server_select(locale):
     write_conf.close()
 
 def get_current_server():
-    all_servers = available_servers.keys()
+    all_servers = available_servers.values()
     read_conf = open('/etc/openvpn/snoop.conf', 'r')
     lines = read_conf.readlines()
+
+    #inv_map = {v: k for k, v in my_map.iteritems()}
 
     while status():
         for i, line in enumerate(lines):

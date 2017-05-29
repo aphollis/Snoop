@@ -103,24 +103,24 @@ def server_select(locale):
 
     write_conf.close()
 
-def get_current_server():
-    all_servers = available_servers.values()
-    read_conf = open('/etc/openvpn/snoop.conf', 'r')
-    lines = read_conf.readlines()
-    key_by_value = {v: k for k, v in available_servers.iteritems()}
-
-    while status():
-        for i, line in enumerate(lines):
-            for item in all_servers:
-                if item in line:
-                    server = key_by_value.get(item)
-
-    else:
-        server = u'Snoop is not connected to a server'
-
-    return server
-
-    read_conf.close()
+# def get_current_server():
+#     all_servers = available_servers.values()
+#     read_conf = open('/etc/openvpn/snoop.conf', 'r')
+#     lines = read_conf.readlines()
+#     key_by_value = {v: k for k, v in available_servers.iteritems()}
+#
+#     while status():
+#         for i, line in enumerate(lines):
+#             for item in all_servers:
+#                 if item in line:
+#                     server = key_by_value.get(item)
+#
+#     else:
+#         server = u'Snoop is not connected to a server'
+#
+#     return server
+#
+#     read_conf.close()
 
 
 

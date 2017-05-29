@@ -21,7 +21,17 @@ date_time=str(datetime.datetime.now())
 def home():
     #get what user submitted
     if request.method == 'POST':
-        
+        if request.form['submit'] == 'Restart':
+            #restart server here
+            pass
+        elif request.form['submit'] == 'Stop':
+            #Stop server here
+            pass
+        elif request.form['submit'] == 'Start':
+            #start server here
+            pass
+        else:
+            pass
         #do this if something is there.. need to work on this
         if user_select_vpn != None or len(user_select_vpn) > 0:
             

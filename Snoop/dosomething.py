@@ -29,15 +29,15 @@ def el_button():
         startstop('start', 'Seattle')
 
 def startstop(action):
-
+    """Starts or stops the Pi VPN process. Takes linux systemctl action"""
     #use subprocess lib to start/stop openvpn, wait for command to complete, print status
 
-    command = subprocess.Popen(['sudo', 'systemctl', action, 'openvpn@snoop'])
+    command = subprocess.Popen(['sudo', 'systemctl', action.lower(), 'openvpn@snoop'])
     command.wait()
     #print("New OpenVPN Status: " + str(status()))
 
 def status():
-
+    """Return's current status of the VPN server as Bool."""
     #output running processes and attempt to find openvpn process.
 
     output = subprocess.check_output(('ps', '-A'))
@@ -52,6 +52,8 @@ def status():
 
 #Parse PIA Host website and return dict w/ Host name and host address
 def available_servers():
+    """Returns dictionary of server locales with hostnames.
+    Pulled from privateinternet's current website."""
     page = requests.get('https://www.privateinternetaccess.com/pages/network/')
 
     #TODO insert better error handling here...

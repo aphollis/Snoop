@@ -23,7 +23,9 @@ def home():
     
     if request.method == 'POST':
         #get input of button
-        if request.form['submit'] != None or len(request.form['submit']) > 0:
+        if request.form['submit'] == None:
+            pass
+        elif len(request.form['submit']) > 0:
             #pass to startstop function
             ds.startstop(request.form['submit'])
         else:

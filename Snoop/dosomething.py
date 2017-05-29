@@ -76,7 +76,7 @@ def available_servers():
         return server_dict
 
 def server_select(locale):
-    config = open('/etc/openvpn/snoop.conf')
+    config = open('/etc/openvpn/snoop.conf', 'w+')
     lines = config.readlines()
     server = available_servers()
     server = server.get(locale)

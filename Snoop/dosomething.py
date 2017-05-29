@@ -18,15 +18,15 @@ Alerts will need to write to a config file to store info.  what else does our co
 
 """
 
-def el_button():
-
-    #if openvpn is running, stop process, else, start process
-
-    if status() == True:
-        startstop('stop', 'Seattle')
-
-    elif status() == False:
-        startstop('start', 'Seattle')
+# def el_button():
+#
+#     #if openvpn is running, stop process, else, start process
+#
+#     if status() == True:
+#         startstop('stop', 'Seattle')
+#
+#     elif status() == False:
+#         startstop('start', 'Seattle')
 
 def startstop(action):
 
@@ -102,6 +102,23 @@ def server_select(locale):
     write_conf.close()
 
 def get_current_server():
+    all_servers = available_servers.keys()
+    read_conf = open('/etc/openvpn/snoop.conf', 'r')
+    lines = read_conf.readlines()
+
+    while status():
+        for i, line in enumerate(lines):
+            for item in all_servers:
+                if item in line:
+                    server = available_servers.get(item)
+
+     else:
+        server = u'Snoop is not connected to a server'
+
+    return server
+
+    read_conf.close()
+
 
 
 

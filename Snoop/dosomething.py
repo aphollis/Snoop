@@ -105,16 +105,15 @@ def get_current_server():
     all_servers = available_servers.values()
     read_conf = open('/etc/openvpn/snoop.conf', 'r')
     lines = read_conf.readlines()
-
-    #inv_map = {v: k for k, v in my_map.iteritems()}
+    key_by_value = {v: k for k, v in available_servers.iteritems()}
 
     while status():
         for i, line in enumerate(lines):
             for item in all_servers:
                 if item in line:
-                    server = available_servers.get(item)
+                    server = key_by_value.get(item)
 
-     else:
+    else:
         server = u'Snoop is not connected to a server'
 
     return server

@@ -92,7 +92,6 @@ def server_select(locale):
     #     if findit in line:
     #         line.replace(findit, conf_line)
 
-    #TODO create new file with new list/overwrite original file
     for i, line in enumerate(lines):
         if findit in line:
             lines[i] = conf_line

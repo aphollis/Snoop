@@ -105,7 +105,8 @@ def server_select(locale):
 
 def get_current_server():
     pass
-    all_servers = available_servers.values()
+    available = dict(available_servers())
+    all_servers = available.values()
     read_conf = open('/etc/openvpn/snoop.conf', 'r')
     lines = read_conf.readlines()
     key_by_value = {v: k for k, v in available_servers.iteritems()}
@@ -136,4 +137,4 @@ def alerts():
 if __name__ == "__main__":
 
     get_current_server()
-    
+

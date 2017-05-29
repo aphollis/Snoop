@@ -32,8 +32,8 @@
         <h2>STOP/START</h2><br />
         <form action="/" method="POST">
             <div class="input submit">
-                <input type="submit" value={{action}}>
-                {{'<input type="submit" value="Restart">' if action=="Stop"}}
+                <input type="submit" name="submit" value={{action}}>
+                {{'<input type="submit" name="submit" value="Restart">' if action=="Stop"}}
             </div>
         </form>
         <i>{{date_time}}</i><br />

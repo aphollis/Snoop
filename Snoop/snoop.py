@@ -33,7 +33,9 @@ def home():
         
         #get input of dropdown to select new server
         user_select_vpn = request.form.get("user_select_vpn")
-        if user_select_vpn != None or len(user_select_vpn) > 0:
+        if user_select_vpn == None:
+            pass
+        elif len(user_select_vpn) > 0:
             #change server
             ds.server_select(user_select_vpn)
             #restart server

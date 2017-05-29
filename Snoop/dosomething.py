@@ -76,12 +76,19 @@ def available_servers():
         return server_dict
 
 def server_select(locale):
-    config = open('/etc/openvpn/snoop.conf', 'w+')
-    lines = config.readlines()
+    read_conf = open('/etc/openvpn/snoop.conf', 'r')
+    lines = read_conf.readlines()
+
+    read_conf.close()
+
+    write_conf = open('/etc/openvpn/snoop.conf', 'w+')
+
     server = available_servers()
     server = server.get(locale)
     findit = 'privateinternetaccess.com'
     conf_line = 'remote ' + server + ' 1198\n'
+
+
 
     # for line in fileinput.FileInput(config, inplace=1):
     #     if findit in line:
@@ -94,9 +101,9 @@ def server_select(locale):
 
     print(lines)
 
-    config.writelines(lines)
+    write_conf.writelines(lines)
 
-    config.close()
+    write_conf.close()
 
 
 def set_active_server():

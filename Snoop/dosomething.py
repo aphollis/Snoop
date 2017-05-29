@@ -79,8 +79,6 @@ def server_select(locale):
     read_conf = open('/etc/openvpn/snoop.conf', 'r')
     lines = read_conf.readlines()
 
-    read_conf.close()
-
     write_conf = open('/etc/openvpn/snoop.conf', 'w+')
 
     server = available_servers()
@@ -99,7 +97,7 @@ def server_select(locale):
         if findit in line:
             lines[i] = conf_line
 
-    print(lines)
+    read_conf.close()
 
     write_conf.writelines(lines)
 

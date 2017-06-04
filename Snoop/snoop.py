@@ -20,6 +20,7 @@ date_time=str(datetime.datetime.now())
 @app.route("/", methods=['GET', 'POST'])
 def home():
     """Core function that generates pages and handles server manipulation"""
+    print('Print is working.')
     print(request)
     print(request.form.items())
 

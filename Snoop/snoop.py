@@ -13,6 +13,7 @@ import requests
 from bs4 import BeautifulSoup 
 import datetime
 import dosomething as ds
+import sys
 
 app = Flask(__name__)
 date_time=str(datetime.datetime.now())
@@ -20,32 +21,44 @@ date_time=str(datetime.datetime.now())
 @app.route("/", methods=['GET', 'POST'])
 def home():
     """Core function that generates pages and handles server manipulation"""
-    
+    sys.stderr.write('Print is working.\n')
+    sys.stderr.write(str(request))
+    sys.stderr.write('\n')
+    sys.stderr.write(str(request.form.items()))
+    sys.stderr.write('\n')
+
     if request.method == 'POST':
+
+        formget = request.form.get('submit')
+        sys.stderr.write('Formget = ' + str(formget)+'\n')
+
         #get input of button
-        if request.form['submit'] == None:
-            pass
-        elif len(request.form['submit']) > 0:
-            #pass to startstop function
-            ds.startstop(request.form['submit'])
-        else:
-            pass
-        
-        #get input of dropdown to select new server
-        user_select_vpn = request.form.get("user_select_vpn")
-        if user_select_vpn == None:
-            pass
-        elif len(user_select_vpn) > 0:
-            #change server
+        if formget is None:
+            user_select_vpn = request.form.get('user_select_vpn')
+            sys.stderr.write('user_select_vpn = ' + str(user_select_vpn) + '\n')
             ds.server_select(user_select_vpn)
-            #restart server
+            # restart server
             ds.startstop('restart')
-            
-        #do this when nothing is there    
-        else:
-            pass
-    else:
-        pass
+        elif formget in ['Start', 'Stop', 'Restart']:
+            #pass to startstop function
+
+            sys.stderr.write('Startstop = ' + str(formget) + '\n')
+            ds.startstop(formget)
+
+        
+        # #get input of dropdown to select new server
+        # user_select_vpn = request.form.get('user_select_vpn')
+        # if user_select_vpn == None:
+        #     pass
+        # elif len(user_select_vpn) > 0:
+        #     #change server
+        #     ds.server_select(user_select_vpn)
+        #     #restart server
+        #     ds.startstop('restart')
+        #
+        # #do this when nothing is there
+        # else:
+        #     pass
     
     #package everything up and render
     resp = make_response(render_template("home.html",

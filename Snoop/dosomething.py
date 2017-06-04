@@ -119,7 +119,7 @@ def get_current_server():
     #
     # else:
     #     server = u'Snoop is not connected to a server'
-    # 
+    #
     # print(server)
     # return server
     #

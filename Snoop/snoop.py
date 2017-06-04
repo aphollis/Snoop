@@ -29,30 +29,30 @@ def home():
 
     if request.method == 'POST':
 
+        formget = request.form.get('submit')
+
         #get input of button
-        if request.form['submit'] == None:
-            pass
-        elif len(request.form['submit']) > 0:
-            #pass to startstop function
-            ds.startstop(request.form['submit'])
-        else:
-            pass
-        
-        #get input of dropdown to select new server
-        user_select_vpn = request.form.get("user_select_vpn")
-        if user_select_vpn == None:
-            pass
-        elif len(user_select_vpn) > 0:
-            #change server
+        if formget is None:
             ds.server_select(user_select_vpn)
-            #restart server
+            # restart server
             ds.startstop('restart')
-            
-        #do this when nothing is there    
-        else:
-            pass
-    else:
-        pass
+        elif formget in ['Start', 'Stop', 'Restart']:
+            #pass to startstop function
+            ds.startstop(formget)
+        
+        # #get input of dropdown to select new server
+        # user_select_vpn = request.form.get('user_select_vpn')
+        # if user_select_vpn == None:
+        #     pass
+        # elif len(user_select_vpn) > 0:
+        #     #change server
+        #     ds.server_select(user_select_vpn)
+        #     #restart server
+        #     ds.startstop('restart')
+        #
+        # #do this when nothing is there
+        # else:
+        #     pass
     
     #package everything up and render
     resp = make_response(render_template("home.html",

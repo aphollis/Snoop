@@ -21,6 +21,7 @@ date_time=str(datetime.datetime.now())
 def home():
     """Core function that generates pages and handles server manipulation"""
     print(request)
+    print(request.form.keys())
     if request.method == 'POST':
 
         #get input of button

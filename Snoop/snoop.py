@@ -22,11 +22,11 @@ date_time=str(datetime.datetime.now())
 def home():
     """Core function that generates pages and handles server manipulation"""
     sys.stderr.write('Print is working.\n')
-    sys.stderr.write(request)
+    sys.stderr.write(str(request))
     sys.stderr.write('\n')
-    sys.stderr.write(request.form.items())
+    sys.stderr.write(str(request.form.items()))
     sys.stderr.write('\n')
-    
+
     if request.method == 'POST':
 
         #get input of button

@@ -21,8 +21,8 @@ Alerts will need to write to a config file to store info.  what else does our co
 def startstop(action):
     """Starts or stops the Pi VPN process. Takes linux systemctl action"""
     #use subprocess lib to start/stop openvpn, wait for command to complete, print status
-    whoami = subprocess.Popen('whoami')
-    sys.stderr.write('IAM = ' + str(whoami) + '\n')
+    whoami = subprocess.check_output('whoami')
+    sys.stderr.write('IAM = ' + str(whoami))
     command = subprocess.Popen(['sudo', 'systemctl', action.lower(), 'openvpn@snoop'])
     command.wait()
     #print("New OpenVPN Status: " + str(status()))

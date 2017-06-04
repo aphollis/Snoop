@@ -20,8 +20,9 @@ date_time=str(datetime.datetime.now())
 @app.route("/", methods=['GET', 'POST'])
 def home():
     """Core function that generates pages and handles server manipulation"""
-    
+    print(request)
     if request.method == 'POST':
+
         #get input of button
         if request.form['submit'] == None:
             pass

@@ -4,7 +4,6 @@ import subprocess
 import requests
 from time import sleep
 from bs4 import BeautifulSoup as bs
-import fileinput
 """el button starts, stops, and outputs status of the vpn server
    actions are start, stop, status.
    locale is the server locale, and should probably come from a VPN web source
@@ -18,21 +17,11 @@ Alerts will need to write to a config file to store info.  what else does our co
 
 """
 
-# def el_button():
-#
-#     #if openvpn is running, stop process, else, start process
-#
-#     if status() == True:
-#         startstop('stop', 'Seattle')
-#
-#     elif status() == False:
-#         startstop('start', 'Seattle')
-
 def startstop(action):
     """Starts or stops the Pi VPN process. Takes linux systemctl action"""
     #use subprocess lib to start/stop openvpn, wait for command to complete, print status
-
-    command = subprocess.Popen(['sudo', 'systemctl', action.lower(), 'openvpn@snoop'])
+    # command = subprocess.Popen(['sudo', 'systemctl', action.lower(), 'openvpn@snoop'])
+    command = subprocess.Popen(['systemctl', action.lower(), 'openvpn@snoop'])
     command.wait()
     #print("New OpenVPN Status: " + str(status()))
 

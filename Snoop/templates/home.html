@@ -33,7 +33,11 @@
         <form action="/" method="POST">
             <div class="input submit">
                 <input type="submit" name="submit" value={{action}}>
-                {{'<input type="submit" name="submit" value="Restart">' if action=="Stop"}}
+                {% block content %}
+                    {{% if action=="Stop" %}}
+                        <input type="submit" name="submit" value="Restart">
+                    {% endif %}
+                {% endblock content %}
             </div>
         </form>
         <i>{{date_time}}</i><br />

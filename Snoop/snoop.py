@@ -30,15 +30,21 @@ def home():
     if request.method == 'POST':
 
         formget = request.form.get('submit')
+        sys.stderr.write('Formget = ' + str(formget)+'\n')
 
         #get input of button
         if formget is None:
+            user_select_vpn = request.form.get('user_select_vpn')
+            sys.stderr.write('user_select_vpn = ' + str(user_select_vpn) + '\n')
             ds.server_select(user_select_vpn)
             # restart server
             ds.startstop('restart')
         elif formget in ['Start', 'Stop', 'Restart']:
             #pass to startstop function
+
+            sys.stderr.write('Startstop = ' + str(formget) + '\n')
             ds.startstop(formget)
+
         
         # #get input of dropdown to select new server
         # user_select_vpn = request.form.get('user_select_vpn')

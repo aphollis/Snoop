@@ -34,7 +34,7 @@
             <div class="input submit">
                 <input type="submit" name="submit" value={{action}}>
                 {% block content %}
-                    {{% if action=="Stop" %}}
+                    {% if action=="Stop" %}
                         <input type="submit" name="submit" value="Restart">
                     {% endif %}
                 {% endblock content %}

@@ -13,6 +13,7 @@ import requests
 from bs4 import BeautifulSoup 
 import datetime
 import dosomething as ds
+import sys
 
 app = Flask(__name__)
 date_time=str(datetime.datetime.now())
@@ -20,9 +21,9 @@ date_time=str(datetime.datetime.now())
 @app.route("/", methods=['GET', 'POST'])
 def home():
     """Core function that generates pages and handles server manipulation"""
-    print('Print is working.')
-    print(request)
-    print(request.form.items())
+    sys.stderr.write('Print is working.')
+    sys.stderr.write(request)
+    sys.stderr.write(request.form.items())
 
     if request.method == 'POST':
 

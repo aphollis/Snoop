@@ -4,6 +4,7 @@ import subprocess
 import requests
 from time import sleep
 from bs4 import BeautifulSoup as bs
+import sys
 """el button starts, stops, and outputs status of the vpn server
    actions are start, stop, status.
    locale is the server locale, and should probably come from a VPN web source

@@ -23,6 +23,10 @@ def startstop(action):
     #use subprocess lib to start/stop openvpn, wait for command to complete, print status
     whoami = subprocess.check_output('whoami')
     sys.stderr.write('IAM = ' + str(whoami))
+    reexec = subprocess.Popen(['systemctl', 'daemon-reexec'])
+    reexec.wait()
+    check_re = 're-exec successful'
+    sys.stderr.write(check_re)
     command = subprocess.Popen(['systemctl', action.lower(), 'openvpn@snoop'])
     command.wait()
     #print("New OpenVPN Status: " + str(status()))

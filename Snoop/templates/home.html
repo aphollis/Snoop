@@ -20,7 +20,7 @@
             <div class="form-group">
                 <select name="user_select_vpn">
                 {% for vpn in available_vpn %}
-                    <option value="{{vpn}}" {{'selected="selected"' if vpn==current_vpn}}>{{vpn}}</option>
+                    <option value={{vpn}} {{'selected="selected"' if vpn==current_vpn}}>{{vpn}}</option>
                 {% endfor %}<br />
                 </select>
                 <div class="input submit">

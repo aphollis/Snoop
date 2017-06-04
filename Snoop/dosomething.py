@@ -27,7 +27,7 @@ def startstop(action):
     reexec.wait()
     check_re = 're-exec successful'
     sys.stderr.write(check_re)
-    command = subprocess.Popen(['systemctl', action.lower(), 'openvpn@snoop'])
+    command = subprocess.Popen(['sudo', 'systemctl', action.lower(), 'openvpn@snoop'])
     command.wait()
     #print("New OpenVPN Status: " + str(status()))
 
